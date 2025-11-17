@@ -42,7 +42,7 @@ paths:
         - name: title
           in: query
           description: >
-            Partial, case-insensitive match on book title.  
+            Partial, case-insensitive match on book title. and can multiple titles comma separated  
             Cannot be empty or whitespace.
           required: false
           schema:
@@ -62,7 +62,7 @@ paths:
         - name: language
           in: query
           description: >
-            Comma-separated 2-letter language codes.  
+            Comma-separated 2,3-letter language codes.  
             Example: `en,fr,de`
           required: false
           schema:
@@ -73,7 +73,7 @@ paths:
         - name: mime_type
           in: query
           description: >
-            Filter books by MIME type prefix.  
+            Filter books by MIME type prefix and can multiple mime_type comma separated 
             Example: `text/`
           required: false
           schema:
@@ -83,7 +83,7 @@ paths:
         - name: topic
           in: query
           description: >
-            Search term applied to subjects and bookshelves.  
+            Search term applied to subjects and bookshelves.  and can multiple topics comma separated
             Case-insensitive partial match.
           required: false
           schema:
