@@ -1,6 +1,5 @@
 import "./bootstrap";
 
-// resources/js/app.js
 import { createApp } from "vue";
 
 import HomePage from "./pages/HomePage.vue";

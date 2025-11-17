@@ -13,11 +13,11 @@ use App\Http\Controllers\BookController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+// Book Genre/Category list page route
 Route::get('/', function () {
     return view('home');
 });
-
+// Book list page route according to selected category
 Route::get('/books/{category}', function ($category) {
     return view('books', compact('category'));
 });

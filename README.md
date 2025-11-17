@@ -28,3 +28,8 @@ This project is a web application built using **Laravel** and **Vue.js** to disp
 ```bash
 git clone https://github.com/your-username/your-repo.git
 cd your-repo
+
+### 2 Import the database dump gutendex.dump into your local database
+### 3 update details in .env file DB_CONNECTION,DB_HOST,DB_PORT,DB_DATABASE,DB_USERNAME,DB_PASSWORD
+### 4 open terminal and run command php artisan serve
+### 4 open another terminal and run command npm run dev
