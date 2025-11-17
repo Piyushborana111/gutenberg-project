@@ -1,0 +1,208 @@
+openapi: 3.0.0
+info:
+  title: Gutendex Books API
+  version: 1.0.0
+  description: >
+    This API provides access to a filtered list of books from the Gutendex
+    dataset. Supports filtering by IDs, title, author, language, MIME type,
+    topics (subjects + bookshelves), and pagination.
+
+servers:
+  - url: http://localhost:8000/api
+
+paths:
+
+  /books:
+    get:
+      summary: Get a paginated list of books
+      description: >
+        Returns a filtered and paginated list of books.  
+        Supports filtering by:
+        - IDs  
+        - Title (case-insensitive, partial match)  
+        - Authors  
+        - Languages  
+        - MIME types  
+        - Topics (subjects + bookshelves)  
+        Pagination is fixed to 25 results per page.
+
+      parameters:
+
+        - name: ids
+          in: query
+          description: >
+            Comma-separated list of Gutenberg book IDs.  
+            Example: `1,2,3`
+          required: false
+          schema:
+            type: string
+            pattern: '^[0-9]+(,[0-9]+)*$'
+          example: "11,12,13"
+
+        - name: title
+          in: query
+          description: >
+            Partial, case-insensitive match on book title.  
+            Cannot be empty or whitespace.
+          required: false
+          schema:
+            type: string
+          example: "Sherlock"
+
+        - name: author
+          in: query
+          description: >
+            Comma-separated list of author keywords.  
+            Case-insensitive partial match.
+          required: false
+          schema:
+            type: string
+          example: "dickens"
+
+        - name: language
+          in: query
+          description: >
+            Comma-separated 2-letter language codes.  
+            Example: `en,fr,de`
+          required: false
+          schema:
+            type: string
+            pattern: '^[a-zA-Z]{2}(,[a-zA-Z]{2})*$'
+          example: "en"
+
+        - name: mime_type
+          in: query
+          description: >
+            Filter books by MIME type prefix.  
+            Example: `text/`
+          required: false
+          schema:
+            type: string
+          example: "text/html"
+
+        - name: topic
+          in: query
+          description: >
+            Search term applied to subjects and bookshelves.  
+            Case-insensitive partial match.
+          required: false
+          schema:
+            type: string
+          example: "children"
+
+        - name: page
+          in: query
+          description: Page number for pagination (min 1).
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+          example: 1
+
+      responses:
+
+        '200':
+          description: Successful list of books
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookListResponse'
+
+        '422':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+
+        '500':
+          description: Internal server error
+
+  /books/{id}:
+    get:
+      summary: Get full details of a single book
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+
+      responses:
+        '200':
+          description: Single book details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+
+        '404':
+          description: Book not found
+
+components:
+
+  schemas:
+
+    BookListResponse:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 1234
+        next_page:
+          type: string
+          nullable: true
+          example: "http://localhost:8000/api/books?page=2"
+        prev_page:
+          type: string
+          nullable: true
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Book'
+
+    Book:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 123
+        title:
+          type: string
+          example: "Sherlock Holmes"
+        authors:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+        subjects:
+          type: array
+          items:
+            type: string
+        bookshelves:
+          type: array
+          items:
+            type: string
+        languages:
+          type: array
+          items:
+            type: string
+        formats:
+          type: object
+          example:
+            "text/html": "https://example.com/book.html"
+            "application/pdf": "https://example.com/book.pdf"
+            "text/plain": "https://example.com/book.txt"
+
+    ValidationError:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "The given data was invalid."
+        errors:
+          type: object
+          example:
+            ids: ["The ids field is required."]

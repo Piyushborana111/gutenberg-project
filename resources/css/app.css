@@ -1,0 +1,535 @@
+/* resources/css/app.css */
+
+/* ---------- 1. variables & reset ---------- */
+/* Montserrat Font Faces */
+@font-face {
+    font-family: "Montserrat";
+    src: url("../assets/fonts/Montserrat-Regular.ttf") format("truetype");
+    font-weight: 400;
+}
+@font-face {
+    font-family: "Montserrat";
+    src: url("../assets/fonts/Montserrat-SemiBold.ttf") format("truetype");
+    font-weight: 600;
+}
+
+:root {
+    --bg: #f7fafc;
+    --card: #ffffff;
+    --muted: #6b7280;
+    --primary: #0ea5a4; /* teal-500 */
+    --primary-600: #0b9a98;
+    --accent: #06b6d4;
+    --radius: 12px;
+    --max-width: 1100px;
+    --gap: 16px;
+    --shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+    --font-sans: "CustomSans", "Inter", system-ui, -apple-system, "Segoe UI",
+        Roboto, "Helvetica Neue", Arial;
+}
+
+h1 {
+    font-family: Montserrat, Semi Bold;
+    font-weight: 600; /* SemiBold */
+    font-size: 48px;
+    color: #5e56e7;
+}
+h2 {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600; /* SemiBold */
+    font-size: 30px;
+    color: #5e56e7;
+}
+/* basic reset */
+* {
+    box-sizing: border-box;
+}
+html,
+body,
+#app {
+    height: 100%;
+}
+body {
+    margin: 0;
+    background-size: cover;
+    background-repeat: repeat;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    color: #0f172a;
+}
+
+.bg-background {
+    background-image: url("../assets/images/Pattern.svg");
+}
+.grid-box {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+    background-color: #f0f0f6;
+}
+.book-image {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    transition: transform 0.5s ease;
+    border-radius: 8px;
+}
+.custom-card:hover {
+    transform: translateY(-5px);
+}
+.book-image-container {
+    width: 114px;
+    height: 162px;
+    box-shadow: 0 2px 5px 0 rgba(211, 209, 238, 0.5);
+}
+.custom-card:hover .book-image {
+    transform: scale(1.05);
+}
+.font-medium {
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 1.4;
+    color: #2c3e50;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    font-family: Montserrat, Regular;
+}
+
+/* ---------- 2. font-face example (put fonts in public/assets/fonts/) ---------- */
+/* Replace filenames with the ones provided to you */
+@font-face {
+    font-family: "CustomSans";
+    src: url("/assets/fonts/CustomSans.woff2") format("woff2"),
+        url("/assets/fonts/CustomSans.woff") format("woff");
+    font-weight: 300 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* ---------- 3. layout container ---------- */
+.container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 24px;
+}
+
+/* page header */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+.app-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.app-title h1 {
+    font-size: 28px;
+    margin: 0;
+    letter-spacing: -0.02em;
+}
+.app-sub {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+/* ---------- 4. Category / Home page ---------- */
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+@media (min-width: 700px) {
+    .category-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+@media (min-width: 1100px) {
+    .category-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.category-btn {
+    background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.02),
+        rgba(255, 255, 255, 0)
+    );
+    border: 1px solid rgba(15, 23, 42, 0.06);
+    padding: 18px;
+    text-align: center;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    box-shadow: var(--shadow);
+}
+.category-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(2, 6, 23, 0.08);
+}
+.category-btn .label {
+    display: block;
+    font-size: 16px;
+}
+.category-btn .count {
+    display: block;
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 6px;
+}
+
+/* ---------- 5. Search bar ---------- */
+.search-row {
+    display: flex;
+    gap: 12px;
+    margin: 16px 0;
+    align-items: center;
+}
+.search-input {
+    flex: 1;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(15, 23, 42, 0.06);
+    background: white;
+    outline: none;
+    font-size: 14px;
+    box-shadow: 0 2px 8px rgba(2, 6, 23, 0.03);
+}
+.search-input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 6px 20px rgba(6, 182, 212, 0.08);
+}
+.category-search-icon {
+    width: 100%;
+}
+/* ---------- 6. Books grid / cards ---------- */
+.books-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 12px;
+    margin-top: 8px;
+}
+
+@media (min-width: 640px) {
+    .books-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (min-width: 980px) {
+    .books-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.book-card {
+    display: flex;
+    gap: 12px;
+    background: var(--card);
+    padding: 12px;
+    border-radius: 12px;
+    align-items: flex-start;
+    cursor: pointer;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+    box-shadow: var(--shadow);
+    min-height: 96px;
+}
+.book-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 36px rgba(2, 6, 23, 0.06);
+}
+
+/* cover */
+.book-cover {
+    width: 78px;
+    height: 110px;
+    border-radius: 8px;
+    object-fit: cover;
+    flex-shrink: 0;
+    background: linear-gradient(180deg, #eef2f7, #fff);
+    display: block;
+    border: 1px solid rgba(2, 6, 23, 0.03);
+}
+
+/* title & meta */
+.book-body {
+    flex: 1;
+}
+.book-title {
+    font-size: 15px;
+    margin: 0 0 6px 0;
+    font-weight: 700;
+}
+.book-authors {
+    color: var(--muted);
+    font-size: 13px;
+    margin: 0 0 8px 0;
+}
+.book-subjects {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+.tag {
+    background: rgba(14, 165, 164, 0.06);
+    color: var(--primary-600);
+    padding: 6px 8px;
+    border-radius: 999px;
+    font-size: 12px;
+}
+
+/* ---------- 7. loader / bottom sentinel ---------- */
+.loader {
+    margin: 24px auto;
+    text-align: center;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+/* nice spinner (CSS only) */
+.spinner {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 4px solid rgba(2, 6, 23, 0.06);
+    border-top-color: var(--primary);
+    animation: spin 1s linear infinite;
+    display: inline-block;
+}
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ---------- 8. empty state ---------- */
+.empty {
+    background: linear-gradient(180deg, #fff, #fafafa);
+    border: 1px dashed rgba(15, 23, 42, 0.06);
+    padding: 28px;
+    border-radius: 12px;
+    text-align: center;
+    color: var(--muted);
+}
+
+/* ---------- 9. small helpers ---------- */
+.row {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.muted {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+/* ---------- 10. responsive tweaks for small devices ---------- */
+@media (max-width: 420px) {
+    .container {
+        padding: 14px;
+    }
+    .app-title h1 {
+        font-size: 22px;
+    }
+    .book-cover {
+        width: 64px;
+        height: 96px;
+    }
+}
+/* Custom Classes */
+.heading-title {
+    font-family: Montserrat, Semi Bold;
+    font-weight: 600; /* SemiBold */
+    font-size: 48px;
+    color: #5e56e7;
+    text-align: left;
+    margin-bottom: 16px;
+    margin-left: 20px;
+}
+
+.intro-text {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: left;
+    color: #333333;
+    margin-left: 20px;
+    font-family: Montserrat, Semi Bold;
+}
+
+.category-btn {
+    background: #fff;
+    color: #333333;
+    font-weight: 600;
+    font-family: "Montserrat", sans-serif;
+    width: 45%;
+    text-align: left;
+    font-size: 25px;
+    margin: 3% 5% 2% 0%;
+    text-transform: uppercase;
+    border-radius: 4px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    box-shadow: 0 2px 5px 0 rgba(211, 209, 238, 0.5);
+}
+.category-icon {
+    width: 30px;
+    float: left;
+    margin-right: 10px;
+}
+.category-next-icon {
+    width: 30px;
+    float: right;
+    padding: 1px;
+}
+.search-container {
+    position: relative;
+    background-color: #f0f0f6;
+    border-radius: 4px;
+}
+.search-box {
+    width: 96%;
+    margin-left: 4%;
+    border: 2px solid #f0f0f6;
+    outline: none;
+    transition: all 0.3s ease;
+    font-size: 16px;
+    background-color: #f0f0f6;
+    font-family: Montserrat, Regular;
+    border-radius: 0.25rem;
+    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+}
+.search-box:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+.w-full {
+    width: 100%;
+}
+.mt-4 {
+    margin-top: 1rem;
+}
+.p-2 {
+    padding: 0.5rem;
+}
+.border {
+    border-width: 1px;
+    border-style: solid;
+    border-color: #e5e7eb;
+}
+.rounded {
+    border-radius: 0.25rem;
+}
+.search-icon {
+    position: absolute;
+    left: 1%;
+    top: 55%;
+    transform: translateY(-50%);
+    color: #7f8c8d;
+    font-size: 1.2rem;
+    width: 18px;
+}
+.grey-bg {
+    background-color: #f0f0f6;
+}
+.header-part {
+    background-color: #fff;
+}
+.book-name {
+    font-weight: 900;
+    font-size: 12px;
+    margin-right: 15%;
+    line-height: 1.4;
+    color: #333333;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    font-family: Montserrat, Semi Bold;
+    text-transform: uppercase;
+    word-wrap: break-word;
+    margin-bottom: 0px;
+}
+.author-name {
+    font-weight: 600;
+    font-size: 10px;
+    margin-right: 15%;
+    line-height: 1.4;
+    color: #a0a0a0;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    font-family: Montserrat, Regular;
+    text-transform: uppercase;
+    margin-top: 7px;
+}
+.text-center-custom {
+    text-align: center; /* text-center */
+    padding-top: 1.5rem; /* py-6 → 24px top */
+    padding-bottom: 1.5rem; /* py-6 → 24px bottom */
+    color: #6b7280; /* text-gray-500 */
+}
+@media (max-width: 640px) {
+    .heading-title {
+        font-size: 35px;
+    }
+    .intro-text {
+        font-size: 15px;
+    }
+    .category-btn {
+        width: 100%;
+        font-size: 20px;
+    }
+    .search-box {
+        padding: 10px 10px 8px 26px;
+        font-size: 1rem;
+        width: 88%;
+        margin-left: 12%;
+
+    }
+    .book-image-container {
+        width: 104px;
+        height: 146px;
+    }
+    .grid-box {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    max-width: 1400px;
+    margin: 0 auto;
+    background-color: #f0f0f6;
+   }
+    .book-name {
+        margin-top: 7px;
+    }
+    .auther-name {
+        margin-top: 4px;
+    }
+    h2 {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .search-icon {
+        position: absolute;
+        left: 3%;
+        top: 52%;
+        transform: translateY(-50%);
+        color: #7f8c8d;
+        font-size: 1.2rem;
+        width: 17px;
+    }
+}
